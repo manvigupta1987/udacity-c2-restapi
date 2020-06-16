@@ -48,6 +48,7 @@ function requireAuth(req, res, next) {
     if (!req.headers || !req.headers.authorization) {
         return res.status(401).send({ message: 'No authorization headers.' });
     }
+    console.log(req.headers.authorization);
     const token_bearer = req.headers.authorization.split(' ');
     if (token_bearer.length != 2) {
         return res.status(401).send({ message: 'Malformed token.' });

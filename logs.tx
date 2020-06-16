@@ -1,0 +1,422 @@
+Retrieving logs...
+============= i-0f07dd5fb1c3fd0df ==============
+----------------------------------------
+/var/log/eb-engine.log
+----------------------------------------
+2020/06/16 09:24:26.366145 [INFO] Finished executing the config set Infra-EmbeddedPostBuild.
+
+2020/06/16 09:24:26.366181 [INFO] Executing instruction: CleanEbExtensions
+2020/06/16 09:24:26.366204 [INFO] Cleaned ebextensions subdirectories from app staging directory.
+2020/06/16 09:24:26.366220 [INFO] Executing instruction: RunPreDeployHooks
+2020/06/16 09:24:26.366228 [INFO] The dir .platform/hooks/predeploy/ does not exist in the application. Skipping this step...
+2020/06/16 09:24:26.366233 [INFO] Executing instruction: stop X-Ray
+2020/06/16 09:24:26.366236 [INFO] stop X-Ray ...
+2020/06/16 09:24:26.366256 [INFO] Running command /bin/sh -c systemctl show -p PartOf xray.service
+2020/06/16 09:24:26.372599 [WARN] stopProcess Warning: process xray is not registered 
+2020/06/16 09:24:26.372631 [INFO] Running command /bin/sh -c systemctl stop xray.service
+2020/06/16 09:24:26.380077 [INFO] Executing instruction: stop proxy
+2020/06/16 09:24:26.380098 [INFO] Running command /bin/sh -c systemctl show -p PartOf nginx.service
+2020/06/16 09:24:26.384192 [INFO] Running command /bin/sh -c systemctl stop nginx.service
+2020/06/16 09:24:26.407790 [INFO] Executing instruction: FlipApplication
+2020/06/16 09:24:26.407804 [INFO] Fetching environment variables...
+2020/06/16 09:24:26.407811 [INFO] No plugin in cfn metadata.
+2020/06/16 09:24:26.407816 [INFO] No plugin in cfn metadata.
+2020/06/16 09:24:26.407825 [INFO] setting default port 8080 to application
+2020/06/16 09:24:26.407947 [INFO] Purge old process...
+2020/06/16 09:24:26.407969 [INFO] Running command /bin/sh -c systemctl stop eb-app.target
+2020/06/16 09:24:26.420985 [INFO] Running command /bin/sh -c systemctl show -p ConsistsOf eb-app.target | cut -d= -f2
+2020/06/16 09:24:26.431243 [INFO] web.service
+
+2020/06/16 09:24:26.431267 [INFO] Running command /bin/sh -c systemctl show -p PartOf web.service
+2020/06/16 09:24:26.435556 [INFO] Running command /bin/sh -c systemctl is-active web.service
+2020/06/16 09:24:26.438926 [INFO] Running command /bin/sh -c systemctl disable web.service
+2020/06/16 09:24:26.517662 [ERROR] Removed symlink /etc/systemd/system/multi-user.target.wants/web.service.
+
+2020/06/16 09:24:26.517764 [INFO] Running command /bin/sh -c systemctl daemon-reload
+2020/06/16 09:24:26.596976 [INFO] Running command /bin/sh -c systemctl reset-failed
+2020/06/16 09:24:26.821760 [INFO] Register application processes...
+2020/06/16 09:24:26.821777 [INFO] Registering the proc: web
+
+2020/06/16 09:24:26.821801 [INFO] Running command /bin/sh -c systemctl show -p PartOf web.service
+2020/06/16 09:24:26.840754 [INFO] Running command /bin/sh -c systemctl daemon-reload
+2020/06/16 09:24:26.915634 [INFO] Running command /bin/sh -c systemctl reset-failed
+2020/06/16 09:24:26.919732 [INFO] Running command /bin/sh -c systemctl is-enabled eb-app.target
+2020/06/16 09:24:26.923443 [INFO] Running command /bin/sh -c systemctl enable eb-app.target
+2020/06/16 09:24:26.997824 [INFO] Running command /bin/sh -c systemctl start eb-app.target
+2020/06/16 09:24:27.003295 [INFO] Running command /bin/sh -c systemctl enable web.service
+2020/06/16 09:24:27.083554 [ERROR] Created symlink from /etc/systemd/system/multi-user.target.wants/web.service to /etc/systemd/system/web.service.
+
+2020/06/16 09:24:27.083598 [INFO] Running command /bin/sh -c systemctl show -p PartOf web.service
+2020/06/16 09:24:27.088630 [INFO] Running command /bin/sh -c systemctl is-active web.service
+2020/06/16 09:24:27.091977 [INFO] Running command /bin/sh -c systemctl start web.service
+2020/06/16 09:24:27.108513 [INFO] Executing instruction: start X-Ray
+2020/06/16 09:24:27.108526 [INFO] X-Ray is not enabled.
+2020/06/16 09:24:27.108531 [INFO] Executing instruction: start proxy with new configuration
+2020/06/16 09:24:27.108552 [INFO] Running command /bin/sh -c /usr/sbin/nginx -t -c /var/proxy/staging/nginx/nginx.conf
+2020/06/16 09:24:27.128779 [ERROR] nginx: the configuration file /var/proxy/staging/nginx/nginx.conf syntax is ok
+nginx: configuration file /var/proxy/staging/nginx/nginx.conf test is successful
+
+2020/06/16 09:24:27.129055 [INFO] Running command /bin/sh -c cp -rp /var/proxy/staging/nginx/. /etc/nginx
+2020/06/16 09:24:27.137570 [INFO] Running command /bin/sh -c systemctl show -p PartOf nginx.service
+2020/06/16 09:24:27.146653 [WARN] Warning: process nginx is already registered...
+Deregistering the process ...
+2020/06/16 09:24:27.146674 [INFO] Running command /bin/sh -c systemctl show -p PartOf nginx.service
+2020/06/16 09:24:27.159080 [INFO] Running command /bin/sh -c systemctl is-active nginx.service
+2020/06/16 09:24:27.167751 [INFO] Running command /bin/sh -c systemctl disable nginx.service
+2020/06/16 09:24:27.278243 [INFO] Running command /bin/sh -c systemctl daemon-reload
+2020/06/16 09:24:27.404826 [INFO] Running command /bin/sh -c systemctl reset-failed
+2020/06/16 09:24:27.414290 [INFO] Running command /bin/sh -c systemctl daemon-reload
+2020/06/16 09:24:27.529350 [INFO] Running command /bin/sh -c systemctl reset-failed
+2020/06/16 09:24:27.534111 [INFO] Running command /bin/sh -c systemctl show -p PartOf nginx.service
+2020/06/16 09:24:27.544663 [INFO] Running command /bin/sh -c systemctl is-active nginx.service
+2020/06/16 09:24:27.551493 [INFO] Running command /bin/sh -c systemctl start nginx.service
+2020/06/16 09:24:27.626324 [INFO] Executing instruction: configureSqsd
+2020/06/16 09:24:27.626340 [INFO] This is a web server environment instance, skip configure sqsd daemon ...
+2020/06/16 09:24:27.626347 [INFO] Executing instruction: startSqsd
+2020/06/16 09:24:27.626351 [INFO] This is a web server environment instance, skip start sqsd daemon ...
+2020/06/16 09:24:27.626355 [INFO] Executing instruction: Track pids in healthd
+2020/06/16 09:24:27.626360 [INFO] This is an enhanced health env...
+2020/06/16 09:24:27.626380 [INFO] Running command /bin/sh -c systemctl show -p ConsistsOf aws-eb.target | cut -d= -f2
+2020/06/16 09:24:27.637175 [INFO] nginx.service cfn-hup.service healthd.service
+
+2020/06/16 09:24:27.637207 [INFO] Running command /bin/sh -c systemctl show -p ConsistsOf eb-app.target | cut -d= -f2
+2020/06/16 09:24:27.647892 [INFO] web.service
+
+2020/06/16 09:24:27.648057 [INFO] Executing instruction: RunPostDeployHooks
+2020/06/16 09:24:27.648069 [INFO] The dir .platform/hooks/postdeploy/ does not exist in the application. Skipping this step...
+2020/06/16 09:24:27.648074 [INFO] Executing cleanup logic
+2020/06/16 09:24:27.648156 [INFO] CommandService Response: {"status":"SUCCESS","api_version":"1.0","results":[{"status":"SUCCESS","msg":"Engine execution has succeeded.","returncode":0,"events":[]}]}
+
+2020/06/16 09:24:27.648349 [INFO] Platform Engine finished execution on command: app-deploy
+
+2020/06/16 09:25:35.959148 [INFO] Starting...
+2020/06/16 09:25:35.959181 [INFO] Starting EBPlatform-PlatformEngine
+2020/06/16 09:25:35.959243 [INFO] no eb envtier info file found, skip loading env tier info.
+2020/06/16 09:25:35.959297 [INFO] Engine received EB command cfn-hup-exec
+
+2020/06/16 09:25:36.031384 [INFO] Running command /bin/sh -c /opt/aws/bin/cfn-get-metadata -s arn:aws:cloudformation:us-east-2:791426477165:stack/awseb-e-pnnkzkz2vi-stack/da0d9570-af71-11ea-870f-0af659736e02 -r AWSEBAutoScalingGroup --region us-east-2
+2020/06/16 09:25:36.366737 [INFO] Running command /bin/sh -c /opt/aws/bin/cfn-get-metadata -s arn:aws:cloudformation:us-east-2:791426477165:stack/awseb-e-pnnkzkz2vi-stack/da0d9570-af71-11ea-870f-0af659736e02 -r AWSEBBeanstalkMetadata --region us-east-2
+2020/06/16 09:25:36.646854 [INFO] checking whether command tail-log is applicable to this instance...
+2020/06/16 09:25:36.646874 [INFO] this command is applicable to the instance, thus instance should execute command
+2020/06/16 09:25:36.646878 [INFO] Engine command: (tail-log)
+
+2020/06/16 09:25:36.646937 [INFO] Executing instruction: GetTailLogs
+2020/06/16 09:25:36.646942 [INFO] Tail Logs...
+2020/06/16 09:25:36.647169 [INFO] Running command /bin/sh -c tail -n 100 /var/log/eb-engine.log
+
+
+----------------------------------------
+/var/log/web.stdout.log
+----------------------------------------
+Jun 16 09:24:28 ip-172-31-29-107 web: npm ERR! Failed at the udacity-c2-restapi@1.0.0 start script.
+Jun 16 09:24:28 ip-172-31-29-107 web: npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+Jun 16 09:24:28 ip-172-31-29-107 web: npm ERR! A complete log of this run can be found in:
+Jun 16 09:24:28 ip-172-31-29-107 web: npm ERR!     /home/webapp/.npm/_logs/2020-06-16T09_24_28_236Z-debug.log
+Jun 16 09:24:28 ip-172-31-29-107 web: > udacity-c2-restapi@1.0.0 start /var/app/current
+Jun 16 09:24:28 ip-172-31-29-107 web: > node .
+Jun 16 09:24:28 ip-172-31-29-107 web: internal/modules/cjs/loader.js:330
+Jun 16 09:24:28 ip-172-31-29-107 web: throw err;
+Jun 16 09:24:28 ip-172-31-29-107 web: ^
+Jun 16 09:24:28 ip-172-31-29-107 web: Error: Cannot find module '/var/app/current/src/server.js'. Please verify that the package.json has a valid "main" entry
+Jun 16 09:24:28 ip-172-31-29-107 web: at tryPackage (internal/modules/cjs/loader.js:322:19)
+Jun 16 09:24:28 ip-172-31-29-107 web: at Function.Module._findPath (internal/modules/cjs/loader.js:683:18)
+Jun 16 09:24:28 ip-172-31-29-107 web: at resolveMainPath (internal/modules/run_main.js:12:25)
+Jun 16 09:24:28 ip-172-31-29-107 web: at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:65:24)
+Jun 16 09:24:28 ip-172-31-29-107 web: at internal/main/run_main_module.js:17:47 {
+Jun 16 09:24:28 ip-172-31-29-107 web: code: 'MODULE_NOT_FOUND',
+Jun 16 09:24:28 ip-172-31-29-107 web: path: '/var/app/current/package.json',
+Jun 16 09:24:28 ip-172-31-29-107 web: requestPath: '/var/app/current'
+Jun 16 09:24:28 ip-172-31-29-107 web: }
+Jun 16 09:24:28 ip-172-31-29-107 web: npm ERR! code ELIFECYCLE
+Jun 16 09:24:28 ip-172-31-29-107 web: npm ERR! errno 1
+Jun 16 09:24:28 ip-172-31-29-107 web: npm ERR! udacity-c2-restapi@1.0.0 start: `node .`
+Jun 16 09:24:28 ip-172-31-29-107 web: npm ERR! Exit status 1
+Jun 16 09:24:28 ip-172-31-29-107 web: npm ERR!
+Jun 16 09:24:28 ip-172-31-29-107 web: npm ERR! Failed at the udacity-c2-restapi@1.0.0 start script.
+Jun 16 09:24:28 ip-172-31-29-107 web: npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+Jun 16 09:24:28 ip-172-31-29-107 web: npm ERR! A complete log of this run can be found in:
+Jun 16 09:24:28 ip-172-31-29-107 web: npm ERR!     /home/webapp/.npm/_logs/2020-06-16T09_24_28_732Z-debug.log
+Jun 16 09:24:29 ip-172-31-29-107 web: > udacity-c2-restapi@1.0.0 start /var/app/current
+Jun 16 09:24:29 ip-172-31-29-107 web: > node .
+Jun 16 09:24:29 ip-172-31-29-107 web: internal/modules/cjs/loader.js:330
+Jun 16 09:24:29 ip-172-31-29-107 web: throw err;
+Jun 16 09:24:29 ip-172-31-29-107 web: ^
+Jun 16 09:24:29 ip-172-31-29-107 web: Error: Cannot find module '/var/app/current/src/server.js'. Please verify that the package.json has a valid "main" entry
+Jun 16 09:24:29 ip-172-31-29-107 web: at tryPackage (internal/modules/cjs/loader.js:322:19)
+Jun 16 09:24:29 ip-172-31-29-107 web: at Function.Module._findPath (internal/modules/cjs/loader.js:683:18)
+Jun 16 09:24:29 ip-172-31-29-107 web: at resolveMainPath (internal/modules/run_main.js:12:25)
+Jun 16 09:24:29 ip-172-31-29-107 web: at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:65:24)
+Jun 16 09:24:29 ip-172-31-29-107 web: at internal/main/run_main_module.js:17:47 {
+Jun 16 09:24:29 ip-172-31-29-107 web: code: 'MODULE_NOT_FOUND',
+Jun 16 09:24:29 ip-172-31-29-107 web: path: '/var/app/current/package.json',
+Jun 16 09:24:29 ip-172-31-29-107 web: requestPath: '/var/app/current'
+Jun 16 09:24:29 ip-172-31-29-107 web: }
+Jun 16 09:24:29 ip-172-31-29-107 web: npm ERR! code ELIFECYCLE
+Jun 16 09:24:29 ip-172-31-29-107 web: npm ERR! errno 1
+Jun 16 09:24:29 ip-172-31-29-107 web: npm ERR! udacity-c2-restapi@1.0.0 start: `node .`
+Jun 16 09:24:29 ip-172-31-29-107 web: npm ERR! Exit status 1
+Jun 16 09:24:29 ip-172-31-29-107 web: npm ERR!
+Jun 16 09:24:29 ip-172-31-29-107 web: npm ERR! Failed at the udacity-c2-restapi@1.0.0 start script.
+Jun 16 09:24:29 ip-172-31-29-107 web: npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+Jun 16 09:24:29 ip-172-31-29-107 web: npm ERR! A complete log of this run can be found in:
+Jun 16 09:24:29 ip-172-31-29-107 web: npm ERR!     /home/webapp/.npm/_logs/2020-06-16T09_24_29_232Z-debug.log
+Jun 16 09:24:29 ip-172-31-29-107 web: > udacity-c2-restapi@1.0.0 start /var/app/current
+Jun 16 09:24:29 ip-172-31-29-107 web: > node .
+Jun 16 09:24:29 ip-172-31-29-107 web: internal/modules/cjs/loader.js:330
+Jun 16 09:24:29 ip-172-31-29-107 web: throw err;
+Jun 16 09:24:29 ip-172-31-29-107 web: ^
+Jun 16 09:24:29 ip-172-31-29-107 web: Error: Cannot find module '/var/app/current/src/server.js'. Please verify that the package.json has a valid "main" entry
+Jun 16 09:24:29 ip-172-31-29-107 web: at tryPackage (internal/modules/cjs/loader.js:322:19)
+Jun 16 09:24:29 ip-172-31-29-107 web: at Function.Module._findPath (internal/modules/cjs/loader.js:683:18)
+Jun 16 09:24:29 ip-172-31-29-107 web: at resolveMainPath (internal/modules/run_main.js:12:25)
+Jun 16 09:24:29 ip-172-31-29-107 web: at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:65:24)
+Jun 16 09:24:29 ip-172-31-29-107 web: at internal/main/run_main_module.js:17:47 {
+Jun 16 09:24:29 ip-172-31-29-107 web: code: 'MODULE_NOT_FOUND',
+Jun 16 09:24:29 ip-172-31-29-107 web: path: '/var/app/current/package.json',
+Jun 16 09:24:29 ip-172-31-29-107 web: requestPath: '/var/app/current'
+Jun 16 09:24:29 ip-172-31-29-107 web: }
+Jun 16 09:24:29 ip-172-31-29-107 web: npm ERR! code ELIFECYCLE
+Jun 16 09:24:29 ip-172-31-29-107 web: npm ERR! errno 1
+Jun 16 09:24:29 ip-172-31-29-107 web: npm ERR! udacity-c2-restapi@1.0.0 start: `node .`
+Jun 16 09:24:29 ip-172-31-29-107 web: npm ERR! Exit status 1
+Jun 16 09:24:29 ip-172-31-29-107 web: npm ERR!
+Jun 16 09:24:29 ip-172-31-29-107 web: npm ERR! Failed at the udacity-c2-restapi@1.0.0 start script.
+Jun 16 09:24:29 ip-172-31-29-107 web: npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+Jun 16 09:24:29 ip-172-31-29-107 web: npm ERR! A complete log of this run can be found in:
+Jun 16 09:24:29 ip-172-31-29-107 web: npm ERR!     /home/webapp/.npm/_logs/2020-06-16T09_24_29_732Z-debug.log
+Jun 16 09:24:30 ip-172-31-29-107 web: > udacity-c2-restapi@1.0.0 start /var/app/current
+Jun 16 09:24:30 ip-172-31-29-107 web: > node .
+Jun 16 09:24:30 ip-172-31-29-107 web: internal/modules/cjs/loader.js:330
+Jun 16 09:24:30 ip-172-31-29-107 web: throw err;
+Jun 16 09:24:30 ip-172-31-29-107 web: ^
+Jun 16 09:24:30 ip-172-31-29-107 web: Error: Cannot find module '/var/app/current/src/server.js'. Please verify that the package.json has a valid "main" entry
+Jun 16 09:24:30 ip-172-31-29-107 web: at tryPackage (internal/modules/cjs/loader.js:322:19)
+Jun 16 09:24:30 ip-172-31-29-107 web: at Function.Module._findPath (internal/modules/cjs/loader.js:683:18)
+Jun 16 09:24:30 ip-172-31-29-107 web: at resolveMainPath (internal/modules/run_main.js:12:25)
+Jun 16 09:24:30 ip-172-31-29-107 web: at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:65:24)
+Jun 16 09:24:30 ip-172-31-29-107 web: at internal/main/run_main_module.js:17:47 {
+Jun 16 09:24:30 ip-172-31-29-107 web: code: 'MODULE_NOT_FOUND',
+Jun 16 09:24:30 ip-172-31-29-107 web: path: '/var/app/current/package.json',
+Jun 16 09:24:30 ip-172-31-29-107 web: requestPath: '/var/app/current'
+Jun 16 09:24:30 ip-172-31-29-107 web: }
+Jun 16 09:24:30 ip-172-31-29-107 web: npm ERR! code ELIFECYCLE
+Jun 16 09:24:30 ip-172-31-29-107 web: npm ERR! errno 1
+Jun 16 09:24:30 ip-172-31-29-107 web: npm ERR! udacity-c2-restapi@1.0.0 start: `node .`
+Jun 16 09:24:30 ip-172-31-29-107 web: npm ERR! Exit status 1
+Jun 16 09:24:30 ip-172-31-29-107 web: npm ERR!
+Jun 16 09:24:30 ip-172-31-29-107 web: npm ERR! Failed at the udacity-c2-restapi@1.0.0 start script.
+Jun 16 09:24:30 ip-172-31-29-107 web: npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+Jun 16 09:24:30 ip-172-31-29-107 web: npm ERR! A complete log of this run can be found in:
+Jun 16 09:24:30 ip-172-31-29-107 web: npm ERR!     /home/webapp/.npm/_logs/2020-06-16T09_24_30_232Z-debug.log
+
+
+----------------------------------------
+/var/log/nginx/access.log
+----------------------------------------
+172.31.17.43 - - [16/Jun/2020:09:13:20 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:13:21 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:13:35 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:13:36 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:13:50 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:13:51 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:14:05 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:14:06 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:14:21 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:14:21 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:14:36 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:14:36 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:14:51 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:14:51 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:15:06 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:15:06 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:15:21 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:15:21 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:15:36 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:15:36 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:15:51 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:15:51 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:16:06 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:16:06 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:16:21 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:16:21 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:16:36 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:16:36 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:16:51 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:16:51 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:17:06 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:17:06 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:17:21 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:17:21 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:17:36 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:17:36 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:17:51 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:17:51 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:18:06 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:18:06 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:18:21 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:18:21 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:18:36 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:18:36 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:18:51 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:18:52 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:19:06 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:19:07 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:19:21 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:19:22 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:19:36 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:19:37 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:19:51 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:19:52 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:20:06 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:20:07 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:20:21 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:20:22 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:20:36 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:20:37 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:20:51 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:20:52 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:21:06 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:21:07 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:21:21 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:21:22 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:21:36 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:21:37 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:21:51 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:21:52 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:22:06 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:22:07 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:22:21 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:22:22 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:22:36 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:22:37 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:22:51 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:22:52 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:23:06 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:23:07 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:23:21 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:23:22 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:23:36 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:23:37 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:23:51 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:23:52 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:24:06 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:24:07 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:24:21 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:24:22 +0000] "GET / HTTP/1.1" 200 8 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:24:36 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:24:37 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:24:44 +0000] "GET /api/v0/feed HTTP/1.1" 502 157 "-" "PostmanRuntime/7.25.0" "99.111.152.119"
+172.31.17.43 - - [16/Jun/2020:09:24:51 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:24:52 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:24:54 +0000] "GET /api/v0/feed HTTP/1.1" 502 157 "-" "PostmanRuntime/7.25.0" "99.111.152.119"
+172.31.17.43 - - [16/Jun/2020:09:25:06 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:25:07 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.17.43 - - [16/Jun/2020:09:25:21 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.40.90 - - [16/Jun/2020:09:25:22 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+
+
+----------------------------------------
+/var/log/nginx/error.log
+----------------------------------------
+2020/06/16 09:07:20 [error] 4392#0: *36 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:07:21 [error] 4392#0: *38 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:07:35 [error] 4392#0: *40 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:07:36 [error] 4392#0: *42 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:07:50 [error] 4906#0: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:07:51 [error] 4906#0: *3 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:08:05 [error] 4906#0: *5 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:08:06 [error] 4906#0: *7 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:08:20 [error] 4906#0: *9 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:08:21 [error] 4906#0: *11 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:08:35 [error] 4906#0: *13 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:08:36 [error] 4906#0: *15 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:08:50 [error] 4906#0: *17 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:08:51 [error] 4906#0: *19 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:09:05 [error] 4906#0: *21 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:09:06 [error] 4906#0: *23 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:09:20 [error] 4906#0: *25 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:09:21 [error] 4906#0: *27 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:09:35 [error] 4906#0: *29 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:09:36 [error] 4906#0: *31 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:09:50 [error] 4906#0: *33 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:09:51 [error] 4906#0: *35 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:10:05 [error] 4906#0: *37 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:10:06 [error] 4906#0: *39 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:10:20 [error] 4906#0: *41 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:10:21 [error] 4906#0: *43 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:10:35 [error] 4906#0: *45 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:10:36 [error] 4906#0: *47 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:10:50 [error] 4906#0: *49 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:10:51 [error] 4906#0: *51 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:11:05 [error] 4906#0: *53 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:11:06 [error] 4906#0: *55 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:11:20 [error] 4906#0: *57 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:11:21 [error] 4906#0: *59 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:11:35 [error] 4906#0: *61 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:11:36 [error] 4906#0: *63 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:11:50 [error] 4906#0: *65 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:11:51 [error] 4906#0: *67 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:12:05 [error] 4906#0: *69 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:12:06 [error] 4906#0: *71 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:12:20 [error] 4906#0: *73 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:12:21 [error] 4906#0: *75 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:12:35 [error] 4906#0: *77 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:12:36 [error] 4906#0: *79 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:12:50 [error] 4906#0: *81 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:12:51 [error] 4906#0: *83 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:13:05 [error] 4906#0: *85 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:13:06 [error] 4906#0: *87 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:13:20 [error] 4906#0: *89 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:13:21 [error] 4906#0: *91 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:13:35 [error] 4906#0: *93 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:13:36 [error] 4906#0: *95 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:13:50 [error] 4906#0: *97 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:13:51 [error] 4906#0: *99 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:14:05 [error] 4906#0: *101 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:14:06 [error] 4906#0: *103 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:14:21 [error] 4906#0: *105 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:14:21 [error] 4906#0: *107 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:14:36 [error] 4906#0: *109 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:14:36 [error] 4906#0: *111 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:14:51 [error] 4906#0: *113 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:14:51 [error] 4906#0: *115 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:15:06 [error] 4906#0: *117 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:15:06 [error] 4906#0: *119 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:15:21 [error] 4906#0: *121 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:15:21 [error] 4906#0: *123 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:15:36 [error] 4906#0: *125 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:15:36 [error] 4906#0: *127 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:15:51 [error] 4906#0: *129 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:15:51 [error] 4906#0: *131 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:16:06 [error] 4906#0: *133 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:16:06 [error] 4906#0: *135 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:16:21 [error] 4906#0: *137 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:16:21 [error] 4906#0: *139 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:16:36 [error] 4906#0: *141 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:16:36 [error] 4906#0: *143 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:16:51 [error] 4906#0: *145 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:16:51 [error] 4906#0: *147 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:17:06 [error] 4906#0: *149 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:17:06 [error] 4906#0: *151 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:17:21 [error] 4906#0: *153 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:17:21 [error] 4906#0: *155 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:17:36 [error] 4906#0: *157 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:17:36 [error] 4906#0: *159 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:17:51 [error] 4906#0: *161 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:17:51 [error] 4906#0: *163 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:18:06 [error] 4906#0: *165 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:18:06 [error] 4906#0: *167 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:18:21 [error] 4906#0: *169 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:18:21 [error] 4906#0: *171 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:24:36 [error] 5884#0: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:24:37 [error] 5884#0: *3 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:24:44 [error] 5884#0: *5 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET /api/v0/feed HTTP/1.1", upstream: "http://127.0.0.1:8080/api/v0/feed", host: "udagram-ruttner-dev-dev3.us-east-2.elasticbeanstalk.com"
+2020/06/16 09:24:51 [error] 5884#0: *7 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:24:52 [error] 5884#0: *9 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:24:54 [error] 5884#0: *5 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET /api/v0/feed HTTP/1.1", upstream: "http://127.0.0.1:8080/api/v0/feed", host: "udagram-ruttner-dev-dev3.us-east-2.elasticbeanstalk.com"
+2020/06/16 09:25:06 [error] 5884#0: *12 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:25:07 [error] 5884#0: *14 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:25:21 [error] 5884#0: *16 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.17.43, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+2020/06/16 09:25:22 [error] 5884#0: *18 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.40.90, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.29.107"
+
+
