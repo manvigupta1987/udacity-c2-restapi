@@ -1,0 +1,412 @@
+Retrieving logs...
+============= i-0562c136586807dd2 ==============
+----------------------------------------
+/var/log/eb-engine.log
+----------------------------------------
+2020/06/16 01:30:00.948203 [INFO] Running command /bin/sh -c systemctl show -p PartOf xray.service
+2020/06/16 01:30:00.955190 [WARN] stopProcess Warning: process xray is not registered 
+2020/06/16 01:30:00.955216 [INFO] Running command /bin/sh -c systemctl stop xray.service
+2020/06/16 01:30:00.962592 [INFO] Executing instruction: stop proxy
+2020/06/16 01:30:00.962615 [INFO] Running command /bin/sh -c systemctl show -p PartOf nginx.service
+2020/06/16 01:30:00.969048 [WARN] stopProcess Warning: process nginx is not registered 
+2020/06/16 01:30:00.969081 [INFO] Running command /bin/sh -c systemctl stop nginx.service
+2020/06/16 01:30:00.973691 [INFO] Executing instruction: FlipApplication
+2020/06/16 01:30:00.973704 [INFO] Fetching environment variables...
+2020/06/16 01:30:00.973710 [INFO] No plugin in cfn metadata.
+2020/06/16 01:30:00.973714 [INFO] No plugin in cfn metadata.
+2020/06/16 01:30:00.973719 [INFO] setting default port 8080 to application
+2020/06/16 01:30:00.973790 [INFO] Purge old process...
+2020/06/16 01:30:00.973844 [INFO] Register application processes...
+2020/06/16 01:30:00.973849 [INFO] Registering the proc: web
+
+2020/06/16 01:30:00.973862 [INFO] Running command /bin/sh -c systemctl show -p PartOf web.service
+2020/06/16 01:30:00.979482 [INFO] Running command /bin/sh -c systemctl daemon-reload
+2020/06/16 01:30:01.061275 [INFO] Running command /bin/sh -c systemctl reset-failed
+2020/06/16 01:30:01.065323 [INFO] Running command /bin/sh -c systemctl is-enabled eb-app.target
+2020/06/16 01:30:01.068745 [INFO] Copying file /opt/elasticbeanstalk/config/private/aws-eb.target to /etc/systemd/system/eb-app.target
+2020/06/16 01:30:01.069983 [INFO] Running command /bin/sh -c systemctl enable eb-app.target
+2020/06/16 01:30:01.153502 [ERROR] Created symlink from /etc/systemd/system/multi-user.target.wants/eb-app.target to /etc/systemd/system/eb-app.target.
+
+2020/06/16 01:30:01.153548 [INFO] Running command /bin/sh -c systemctl start eb-app.target
+2020/06/16 01:30:01.158817 [INFO] Running command /bin/sh -c systemctl enable web.service
+2020/06/16 01:30:01.243730 [ERROR] Created symlink from /etc/systemd/system/multi-user.target.wants/web.service to /etc/systemd/system/web.service.
+
+2020/06/16 01:30:01.243772 [INFO] Running command /bin/sh -c systemctl show -p PartOf web.service
+2020/06/16 01:30:01.248890 [INFO] Running command /bin/sh -c systemctl is-active web.service
+2020/06/16 01:30:01.252420 [INFO] Running command /bin/sh -c systemctl start web.service
+2020/06/16 01:30:01.269715 [INFO] Executing instruction: start X-Ray
+2020/06/16 01:30:01.269730 [INFO] X-Ray is not enabled.
+2020/06/16 01:30:01.269736 [INFO] Executing instruction: start proxy with new configuration
+2020/06/16 01:30:01.269767 [INFO] Running command /bin/sh -c /usr/sbin/nginx -t -c /var/proxy/staging/nginx/nginx.conf
+2020/06/16 01:30:01.296682 [ERROR] nginx: the configuration file /var/proxy/staging/nginx/nginx.conf syntax is ok
+nginx: configuration file /var/proxy/staging/nginx/nginx.conf test is successful
+
+2020/06/16 01:30:01.296755 [INFO] Running command /bin/sh -c cp -rp /var/proxy/staging/nginx/. /etc/nginx
+2020/06/16 01:30:01.304313 [INFO] Running command /bin/sh -c systemctl show -p PartOf nginx.service
+2020/06/16 01:30:01.317058 [INFO] Running command /bin/sh -c systemctl daemon-reload
+2020/06/16 01:30:01.431374 [INFO] Running command /bin/sh -c systemctl reset-failed
+2020/06/16 01:30:01.441995 [INFO] Running command /bin/sh -c systemctl show -p PartOf nginx.service
+2020/06/16 01:30:01.452675 [INFO] Running command /bin/sh -c systemctl is-active nginx.service
+2020/06/16 01:30:01.462160 [INFO] Running command /bin/sh -c systemctl start nginx.service
+2020/06/16 01:30:01.547698 [INFO] Executing instruction: configureSqsd
+2020/06/16 01:30:01.547714 [INFO] This is a web server environment instance, skip configure sqsd daemon ...
+2020/06/16 01:30:01.547718 [INFO] Executing instruction: startSqsd
+2020/06/16 01:30:01.547722 [INFO] This is a web server environment instance, skip start sqsd daemon ...
+2020/06/16 01:30:01.547726 [INFO] Executing instruction: Track pids in healthd
+2020/06/16 01:30:01.547731 [INFO] This is an enhanced health env...
+2020/06/16 01:30:01.547749 [INFO] Running command /bin/sh -c systemctl show -p ConsistsOf aws-eb.target | cut -d= -f2
+2020/06/16 01:30:01.563201 [INFO] healthd.service nginx.service cfn-hup.service
+
+2020/06/16 01:30:01.563242 [INFO] Running command /bin/sh -c systemctl show -p ConsistsOf eb-app.target | cut -d= -f2
+2020/06/16 01:30:01.574231 [INFO] web.service
+
+2020/06/16 01:30:01.574375 [INFO] Executing instruction: RunPostDeployHooks
+2020/06/16 01:30:01.574387 [INFO] The dir .platform/hooks/postdeploy/ does not exist in the application. Skipping this step...
+2020/06/16 01:30:01.574393 [INFO] Executing cleanup logic
+2020/06/16 01:30:01.574466 [INFO] CommandService Response: {"status":"SUCCESS","api_version":"1.0","results":[{"status":"SUCCESS","msg":"Engine execution has succeeded.","returncode":0,"events":[]}]}
+
+2020/06/16 01:30:01.574616 [INFO] Platform Engine finished execution on command: app-deploy
+
+2020/06/16 01:43:19.205672 [INFO] Starting...
+2020/06/16 01:43:19.205711 [INFO] Starting EBPlatform-PlatformEngine
+2020/06/16 01:43:19.205772 [INFO] no eb envtier info file found, skip loading env tier info.
+2020/06/16 01:43:19.205829 [INFO] Engine received EB command cfn-hup-exec
+
+2020/06/16 01:43:19.281277 [INFO] Running command /bin/sh -c /opt/aws/bin/cfn-get-metadata -s arn:aws:cloudformation:us-east-2:791426477165:stack/awseb-e-hqkvwihwxg-stack/85303b30-af70-11ea-bdf5-022fd555c652 -r AWSEBAutoScalingGroup --region us-east-2
+2020/06/16 01:43:19.624677 [INFO] Running command /bin/sh -c /opt/aws/bin/cfn-get-metadata -s arn:aws:cloudformation:us-east-2:791426477165:stack/awseb-e-hqkvwihwxg-stack/85303b30-af70-11ea-bdf5-022fd555c652 -r AWSEBBeanstalkMetadata --region us-east-2
+2020/06/16 01:43:19.953793 [INFO] checking whether command tail-log is applicable to this instance...
+2020/06/16 01:43:19.953813 [INFO] this command is applicable to the instance, thus instance should execute command
+2020/06/16 01:43:19.953817 [INFO] Engine command: (tail-log)
+
+2020/06/16 01:43:19.953863 [INFO] Executing instruction: GetTailLogs
+2020/06/16 01:43:19.953880 [INFO] Tail Logs...
+2020/06/16 01:43:19.954137 [INFO] Running command /bin/sh -c tail -n 100 /var/log/eb-engine.log
+2020/06/16 01:43:19.955935 [INFO] Running command /bin/sh -c tail -n 100 /var/log/web.stdout.log
+2020/06/16 01:43:19.957500 [INFO] Running command /bin/sh -c tail -n 100 /var/log/nginx/access.log
+2020/06/16 01:43:19.959122 [INFO] Running command /bin/sh -c tail -n 100 /var/log/nginx/error.log
+2020/06/16 01:43:20.068772 [INFO] Executing cleanup logic
+2020/06/16 01:43:20.068864 [INFO] CommandService Response: {"status":"SUCCESS","api_version":"1.0","results":[{"status":"SUCCESS","msg":"Engine execution has succeeded.","returncode":0,"events":[]}]}
+
+2020/06/16 01:43:20.068942 [INFO] Platform Engine finished execution on command: tail-log
+
+2020/06/16 01:44:17.821533 [INFO] Starting...
+2020/06/16 01:44:17.821573 [INFO] Starting EBPlatform-PlatformEngine
+2020/06/16 01:44:17.821638 [INFO] no eb envtier info file found, skip loading env tier info.
+2020/06/16 01:44:17.821698 [INFO] Engine received EB command cfn-hup-exec
+
+2020/06/16 01:44:17.893076 [INFO] Running command /bin/sh -c /opt/aws/bin/cfn-get-metadata -s arn:aws:cloudformation:us-east-2:791426477165:stack/awseb-e-hqkvwihwxg-stack/85303b30-af70-11ea-bdf5-022fd555c652 -r AWSEBAutoScalingGroup --region us-east-2
+2020/06/16 01:44:18.227867 [INFO] Running command /bin/sh -c /opt/aws/bin/cfn-get-metadata -s arn:aws:cloudformation:us-east-2:791426477165:stack/awseb-e-hqkvwihwxg-stack/85303b30-af70-11ea-bdf5-022fd555c652 -r AWSEBBeanstalkMetadata --region us-east-2
+2020/06/16 01:44:18.508321 [INFO] checking whether command tail-log is applicable to this instance...
+2020/06/16 01:44:18.508342 [INFO] this command is applicable to the instance, thus instance should execute command
+2020/06/16 01:44:18.508346 [INFO] Engine command: (tail-log)
+
+2020/06/16 01:44:18.508395 [INFO] Executing instruction: GetTailLogs
+2020/06/16 01:44:18.508400 [INFO] Tail Logs...
+2020/06/16 01:44:18.508649 [INFO] Running command /bin/sh -c tail -n 100 /var/log/eb-engine.log
+
+
+----------------------------------------
+/var/log/web.stdout.log
+----------------------------------------
+Jun 16 01:30:01 ip-172-31-35-107 web: > udacity-c2-restapi@1.0.0 start /var/app/current
+Jun 16 01:30:01 ip-172-31-35-107 web: > node .
+Jun 16 01:30:02 ip-172-31-35-107 web: (node:3875) UnhandledPromiseRejectionWarning: SequelizeConnectionRefusedError: connect ECONNREFUSED 127.0.0.1:5432
+Jun 16 01:30:02 ip-172-31-35-107 web: at /var/app/current/node_modules/sequelize/lib/dialects/postgres/connection-manager.js:170:24
+Jun 16 01:30:02 ip-172-31-35-107 web: at Connection.connectingErrorHandler (/var/app/current/node_modules/pg/lib/client.js:194:14)
+Jun 16 01:30:02 ip-172-31-35-107 web: at Connection.emit (events.js:315:20)
+Jun 16 01:30:02 ip-172-31-35-107 web: at Connection.EventEmitter.emit (domain.js:482:12)
+Jun 16 01:30:02 ip-172-31-35-107 web: at Socket.reportStreamError (/var/app/current/node_modules/pg/lib/connection.js:73:10)
+Jun 16 01:30:02 ip-172-31-35-107 web: at Socket.emit (events.js:315:20)
+Jun 16 01:30:02 ip-172-31-35-107 web: at Socket.EventEmitter.emit (domain.js:482:12)
+Jun 16 01:30:02 ip-172-31-35-107 web: at emitErrorNT (internal/streams/destroy.js:92:8)
+Jun 16 01:30:02 ip-172-31-35-107 web: at emitErrorAndCloseNT (internal/streams/destroy.js:60:3)
+Jun 16 01:30:02 ip-172-31-35-107 web: at processTicksAndRejections (internal/process/task_queues.js:84:21)
+Jun 16 01:30:02 ip-172-31-35-107 web: (node:3875) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+Jun 16 01:30:02 ip-172-31-35-107 web: (node:3875) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+Jun 16 01:30:03 ip-172-31-35-107 web: > udacity-c2-restapi@1.0.0 start /var/app/current
+Jun 16 01:30:03 ip-172-31-35-107 web: > node .
+Jun 16 01:30:04 ip-172-31-35-107 web: (node:3925) UnhandledPromiseRejectionWarning: SequelizeConnectionRefusedError: connect ECONNREFUSED 127.0.0.1:5432
+Jun 16 01:30:04 ip-172-31-35-107 web: at /var/app/current/node_modules/sequelize/lib/dialects/postgres/connection-manager.js:170:24
+Jun 16 01:30:04 ip-172-31-35-107 web: at Connection.connectingErrorHandler (/var/app/current/node_modules/pg/lib/client.js:194:14)
+Jun 16 01:30:04 ip-172-31-35-107 web: at Connection.emit (events.js:315:20)
+Jun 16 01:30:04 ip-172-31-35-107 web: at Connection.EventEmitter.emit (domain.js:482:12)
+Jun 16 01:30:04 ip-172-31-35-107 web: at Socket.reportStreamError (/var/app/current/node_modules/pg/lib/connection.js:73:10)
+Jun 16 01:30:04 ip-172-31-35-107 web: at Socket.emit (events.js:315:20)
+Jun 16 01:30:04 ip-172-31-35-107 web: at Socket.EventEmitter.emit (domain.js:482:12)
+Jun 16 01:30:04 ip-172-31-35-107 web: at emitErrorNT (internal/streams/destroy.js:92:8)
+Jun 16 01:30:04 ip-172-31-35-107 web: at emitErrorAndCloseNT (internal/streams/destroy.js:60:3)
+Jun 16 01:30:04 ip-172-31-35-107 web: at processTicksAndRejections (internal/process/task_queues.js:84:21)
+Jun 16 01:30:04 ip-172-31-35-107 web: (node:3925) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+Jun 16 01:30:04 ip-172-31-35-107 web: (node:3925) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+Jun 16 01:30:04 ip-172-31-35-107 web: > udacity-c2-restapi@1.0.0 start /var/app/current
+Jun 16 01:30:04 ip-172-31-35-107 web: > node .
+Jun 16 01:30:05 ip-172-31-35-107 web: (node:3964) UnhandledPromiseRejectionWarning: SequelizeConnectionRefusedError: connect ECONNREFUSED 127.0.0.1:5432
+Jun 16 01:30:05 ip-172-31-35-107 web: at /var/app/current/node_modules/sequelize/lib/dialects/postgres/connection-manager.js:170:24
+Jun 16 01:30:05 ip-172-31-35-107 web: at Connection.connectingErrorHandler (/var/app/current/node_modules/pg/lib/client.js:194:14)
+Jun 16 01:30:05 ip-172-31-35-107 web: at Connection.emit (events.js:315:20)
+Jun 16 01:30:05 ip-172-31-35-107 web: at Connection.EventEmitter.emit (domain.js:482:12)
+Jun 16 01:30:05 ip-172-31-35-107 web: at Socket.reportStreamError (/var/app/current/node_modules/pg/lib/connection.js:73:10)
+Jun 16 01:30:05 ip-172-31-35-107 web: at Socket.emit (events.js:315:20)
+Jun 16 01:30:05 ip-172-31-35-107 web: at Socket.EventEmitter.emit (domain.js:482:12)
+Jun 16 01:30:05 ip-172-31-35-107 web: at emitErrorNT (internal/streams/destroy.js:92:8)
+Jun 16 01:30:05 ip-172-31-35-107 web: at emitErrorAndCloseNT (internal/streams/destroy.js:60:3)
+Jun 16 01:30:05 ip-172-31-35-107 web: at processTicksAndRejections (internal/process/task_queues.js:84:21)
+Jun 16 01:30:05 ip-172-31-35-107 web: (node:3964) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+Jun 16 01:30:05 ip-172-31-35-107 web: (node:3964) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+Jun 16 01:30:06 ip-172-31-35-107 web: > udacity-c2-restapi@1.0.0 start /var/app/current
+Jun 16 01:30:06 ip-172-31-35-107 web: > node .
+Jun 16 01:30:06 ip-172-31-35-107 web: (node:3995) UnhandledPromiseRejectionWarning: SequelizeConnectionRefusedError: connect ECONNREFUSED 127.0.0.1:5432
+Jun 16 01:30:06 ip-172-31-35-107 web: at /var/app/current/node_modules/sequelize/lib/dialects/postgres/connection-manager.js:170:24
+Jun 16 01:30:06 ip-172-31-35-107 web: at Connection.connectingErrorHandler (/var/app/current/node_modules/pg/lib/client.js:194:14)
+Jun 16 01:30:06 ip-172-31-35-107 web: at Connection.emit (events.js:315:20)
+Jun 16 01:30:06 ip-172-31-35-107 web: at Connection.EventEmitter.emit (domain.js:482:12)
+Jun 16 01:30:06 ip-172-31-35-107 web: at Socket.reportStreamError (/var/app/current/node_modules/pg/lib/connection.js:73:10)
+Jun 16 01:30:06 ip-172-31-35-107 web: at Socket.emit (events.js:315:20)
+Jun 16 01:30:06 ip-172-31-35-107 web: at Socket.EventEmitter.emit (domain.js:482:12)
+Jun 16 01:30:06 ip-172-31-35-107 web: at emitErrorNT (internal/streams/destroy.js:92:8)
+Jun 16 01:30:06 ip-172-31-35-107 web: at emitErrorAndCloseNT (internal/streams/destroy.js:60:3)
+Jun 16 01:30:06 ip-172-31-35-107 web: at processTicksAndRejections (internal/process/task_queues.js:84:21)
+Jun 16 01:30:06 ip-172-31-35-107 web: (node:3995) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+Jun 16 01:30:06 ip-172-31-35-107 web: (node:3995) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+Jun 16 01:30:07 ip-172-31-35-107 web: > udacity-c2-restapi@1.0.0 start /var/app/current
+Jun 16 01:30:07 ip-172-31-35-107 web: > node .
+Jun 16 01:30:08 ip-172-31-35-107 web: (node:4026) UnhandledPromiseRejectionWarning: SequelizeConnectionRefusedError: connect ECONNREFUSED 127.0.0.1:5432
+Jun 16 01:30:08 ip-172-31-35-107 web: at /var/app/current/node_modules/sequelize/lib/dialects/postgres/connection-manager.js:170:24
+Jun 16 01:30:08 ip-172-31-35-107 web: at Connection.connectingErrorHandler (/var/app/current/node_modules/pg/lib/client.js:194:14)
+Jun 16 01:30:08 ip-172-31-35-107 web: at Connection.emit (events.js:315:20)
+Jun 16 01:30:08 ip-172-31-35-107 web: at Connection.EventEmitter.emit (domain.js:482:12)
+Jun 16 01:30:08 ip-172-31-35-107 web: at Socket.reportStreamError (/var/app/current/node_modules/pg/lib/connection.js:73:10)
+Jun 16 01:30:08 ip-172-31-35-107 web: at Socket.emit (events.js:315:20)
+Jun 16 01:30:08 ip-172-31-35-107 web: at Socket.EventEmitter.emit (domain.js:482:12)
+Jun 16 01:30:08 ip-172-31-35-107 web: at emitErrorNT (internal/streams/destroy.js:92:8)
+Jun 16 01:30:08 ip-172-31-35-107 web: at emitErrorAndCloseNT (internal/streams/destroy.js:60:3)
+Jun 16 01:30:08 ip-172-31-35-107 web: at processTicksAndRejections (internal/process/task_queues.js:84:21)
+Jun 16 01:30:08 ip-172-31-35-107 web: (node:4026) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+Jun 16 01:30:08 ip-172-31-35-107 web: (node:4026) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+Jun 16 01:30:08 ip-172-31-35-107 web: > udacity-c2-restapi@1.0.0 start /var/app/current
+Jun 16 01:30:08 ip-172-31-35-107 web: > node .
+Jun 16 01:30:09 ip-172-31-35-107 web: (node:4057) UnhandledPromiseRejectionWarning: SequelizeConnectionRefusedError: connect ECONNREFUSED 127.0.0.1:5432
+Jun 16 01:30:09 ip-172-31-35-107 web: at /var/app/current/node_modules/sequelize/lib/dialects/postgres/connection-manager.js:170:24
+Jun 16 01:30:09 ip-172-31-35-107 web: at Connection.connectingErrorHandler (/var/app/current/node_modules/pg/lib/client.js:194:14)
+Jun 16 01:30:09 ip-172-31-35-107 web: at Connection.emit (events.js:315:20)
+Jun 16 01:30:09 ip-172-31-35-107 web: at Connection.EventEmitter.emit (domain.js:482:12)
+Jun 16 01:30:09 ip-172-31-35-107 web: at Socket.reportStreamError (/var/app/current/node_modules/pg/lib/connection.js:73:10)
+Jun 16 01:30:09 ip-172-31-35-107 web: at Socket.emit (events.js:315:20)
+Jun 16 01:30:09 ip-172-31-35-107 web: at Socket.EventEmitter.emit (domain.js:482:12)
+Jun 16 01:30:09 ip-172-31-35-107 web: at emitErrorNT (internal/streams/destroy.js:92:8)
+Jun 16 01:30:09 ip-172-31-35-107 web: at emitErrorAndCloseNT (internal/streams/destroy.js:60:3)
+Jun 16 01:30:09 ip-172-31-35-107 web: at processTicksAndRejections (internal/process/task_queues.js:84:21)
+Jun 16 01:30:09 ip-172-31-35-107 web: (node:4057) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+Jun 16 01:30:09 ip-172-31-35-107 web: (node:4057) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+
+
+----------------------------------------
+/var/log/nginx/access.log
+----------------------------------------
+172.31.12.47 - - [16/Jun/2020:01:31:54 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:32:02 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:32:09 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:32:17 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:32:24 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:32:32 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:32:39 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:32:47 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:32:54 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:33:02 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:33:09 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:33:17 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:33:24 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:33:32 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:33:39 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:33:47 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:33:54 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:34:02 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:34:09 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:34:17 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:34:24 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:34:32 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:34:39 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:34:47 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:34:54 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:35:02 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:35:09 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:35:17 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:35:24 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:35:32 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:35:39 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:35:47 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:35:54 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:36:03 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:36:09 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:36:18 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:36:24 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:36:33 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:36:39 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:36:48 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:36:54 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:37:03 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:37:09 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:37:18 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:37:24 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:37:33 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:37:39 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:37:48 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:37:54 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:38:03 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:38:09 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:38:18 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:38:24 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:38:33 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:38:39 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:38:48 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:38:54 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:39:03 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:39:09 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:39:18 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:39:24 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:39:33 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:39:39 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:39:48 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:39:54 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:40:03 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:40:09 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:40:18 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:40:25 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:40:33 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:40:40 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:40:48 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:40:55 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:41:03 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:41:10 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:41:18 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:41:25 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:41:33 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:41:40 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:41:48 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:41:55 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:42:03 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:42:10 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:42:18 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:42:25 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:42:33 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:42:40 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:42:48 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:42:55 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:43:03 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:43:10 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:43:18 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:43:25 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:43:33 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:43:40 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:43:48 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:43:55 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:44:03 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.12.47 - - [16/Jun/2020:01:44:10 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+172.31.36.168 - - [16/Jun/2020:01:44:18 +0000] "GET / HTTP/1.1" 502 157 "-" "ELB-HealthChecker/2.0" "-"
+
+
+----------------------------------------
+/var/log/nginx/error.log
+----------------------------------------
+2020/06/16 01:31:54 [error] 3858#0: *25 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:32:02 [error] 3858#0: *27 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:32:09 [error] 3858#0: *29 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:32:17 [error] 3858#0: *31 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:32:24 [error] 3858#0: *33 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:32:32 [error] 3858#0: *35 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:32:39 [error] 3858#0: *37 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:32:47 [error] 3858#0: *39 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:32:54 [error] 3858#0: *41 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:33:02 [error] 3858#0: *43 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:33:09 [error] 3858#0: *45 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:33:17 [error] 3858#0: *47 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:33:24 [error] 3858#0: *49 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:33:32 [error] 3858#0: *51 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:33:39 [error] 3858#0: *53 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:33:47 [error] 3858#0: *55 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:33:54 [error] 3858#0: *57 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:34:02 [error] 3858#0: *59 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:34:09 [error] 3858#0: *61 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:34:17 [error] 3858#0: *63 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:34:24 [error] 3858#0: *65 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:34:32 [error] 3858#0: *67 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:34:39 [error] 3858#0: *69 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:34:47 [error] 3858#0: *71 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:34:54 [error] 3858#0: *73 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:35:02 [error] 3858#0: *75 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:35:09 [error] 3858#0: *77 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:35:17 [error] 3858#0: *79 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:35:24 [error] 3858#0: *81 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:35:32 [error] 3858#0: *83 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:35:39 [error] 3858#0: *85 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:35:47 [error] 3858#0: *87 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:35:54 [error] 3858#0: *89 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:36:03 [error] 3858#0: *91 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:36:09 [error] 3858#0: *93 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:36:18 [error] 3858#0: *95 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:36:24 [error] 3858#0: *97 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:36:33 [error] 3858#0: *99 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:36:39 [error] 3858#0: *101 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:36:48 [error] 3858#0: *103 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:36:54 [error] 3858#0: *105 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:37:03 [error] 3858#0: *107 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:37:09 [error] 3858#0: *109 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:37:18 [error] 3858#0: *111 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:37:24 [error] 3858#0: *113 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:37:33 [error] 3858#0: *115 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:37:39 [error] 3858#0: *117 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:37:48 [error] 3858#0: *119 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:37:54 [error] 3858#0: *121 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:38:03 [error] 3858#0: *123 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:38:09 [error] 3858#0: *125 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:38:18 [error] 3858#0: *127 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:38:24 [error] 3858#0: *129 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:38:33 [error] 3858#0: *131 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:38:39 [error] 3858#0: *133 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:38:48 [error] 3858#0: *135 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:38:54 [error] 3858#0: *137 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:39:03 [error] 3858#0: *139 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:39:09 [error] 3858#0: *141 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:39:18 [error] 3858#0: *143 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:39:24 [error] 3858#0: *145 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:39:33 [error] 3858#0: *147 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:39:39 [error] 3858#0: *149 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:39:48 [error] 3858#0: *151 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:39:54 [error] 3858#0: *153 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:40:03 [error] 3858#0: *155 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:40:09 [error] 3858#0: *157 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:40:18 [error] 3858#0: *159 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:40:25 [error] 3858#0: *161 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:40:33 [error] 3858#0: *163 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:40:40 [error] 3858#0: *165 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:40:48 [error] 3858#0: *167 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:40:55 [error] 3858#0: *169 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:41:03 [error] 3858#0: *171 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:41:10 [error] 3858#0: *173 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:41:18 [error] 3858#0: *175 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:41:25 [error] 3858#0: *177 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:41:33 [error] 3858#0: *179 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:41:40 [error] 3858#0: *181 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:41:48 [error] 3858#0: *183 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:41:55 [error] 3858#0: *185 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:42:03 [error] 3858#0: *187 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:42:10 [error] 3858#0: *189 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:42:18 [error] 3858#0: *191 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:42:25 [error] 3858#0: *193 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:42:33 [error] 3858#0: *195 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:42:40 [error] 3858#0: *197 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:42:48 [error] 3858#0: *199 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:42:55 [error] 3858#0: *201 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:43:03 [error] 3858#0: *203 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:43:10 [error] 3858#0: *205 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:43:18 [error] 3858#0: *207 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:43:25 [error] 3858#0: *209 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:43:33 [error] 3858#0: *211 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:43:40 [error] 3858#0: *213 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:43:48 [error] 3858#0: *215 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:43:55 [error] 3858#0: *217 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:44:03 [error] 3858#0: *219 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:44:10 [error] 3858#0: *221 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.12.47, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+2020/06/16 01:44:18 [error] 3858#0: *223 connect() failed (111: Connection refused) while connecting to upstream, client: 172.31.36.168, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "172.31.35.107"
+
+
